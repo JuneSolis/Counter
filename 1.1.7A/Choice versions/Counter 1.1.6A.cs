@@ -1,14 +1,14 @@
 using System;
 using System.Threading;
-public static class Counter
+public class Counter_1_1_6A
 {
-    public const string InternalVersion = "1.1.6";
-    public const string Title = "Counter v" + InternalVersion;
+    public const string InternalVersion = "1.1.6a";
+    public const string Text = "Counter v" + InternalVersion;
     public static string arg;
     public static void Main(string[] args)
     {
-        Console.Title = Title;
-        Console.WriteLine(Title);
+        Console.Title = Text;
+        Console.WriteLine(Text);
         if (args.Length > 0)
         {
             arg = args[0];

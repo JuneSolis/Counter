@@ -2,6 +2,9 @@ name: Build
 on:
   push:
   workflow_dispatch:
+  schedule:
+    # Every Monday at 12am
+    - cron: '0 0 * * 1'
 
 concurrency:
   group: ${{ github.ref }}-latest
@@ -9,8 +12,7 @@ concurrency:
 
 jobs:
   build:
-    if: github.ref_name == github.event.repository.default_branch
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - name: Compile Counter using mono
@@ -18,14 +20,7 @@ jobs:
         id: compile
         run: |
           msbuild Counters.sln /p:Configuration=Release
-          cp -R Bin/Release Bin/Release_normal
           msbuild Starter/Starter.csproj /p:Configuration=Release
-
-      - uses: ./.github/actions/notify_failure
-        if: ${{ always() && steps.compile.outcome == 'failure' }}
-        with:
-          NOTIFY_MESSAGE: 'Failed to compile Counter! <@999409543001931788>'
-          WEBHOOK_URL: '${{ secrets.WEBHOOK_URL }}'
           
       - uses: ./.github/actions/notify_success
         if: ${{ always() && steps.compile.outcome == 'success' }}
@@ -33,4 +28,10 @@ jobs:
           SOURCE_FILE: 'Bin/Release'
           DEST_NAME: 'Counter'
           NOTIFY_MESSAGE: 'Successfully compiled Counter!'
+          WEBHOOK_URL: '${{ secrets.WEBHOOK_URL }}'
+     
+      - uses: ./.github/actions/notify_failure
+        if: failure()
+        with:
+          NOTIFY_MESSAGE: 'Failed to compile Counter! <@999409543001931788>'
           WEBHOOK_URL: '${{ secrets.WEBHOOK_URL }}'

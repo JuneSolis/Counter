@@ -5,14 +5,22 @@ namespace Infinite_Counter
     {
         public static float A, B;
         public static double C, D;
-        public const string InternalVersion = "0.0.0.5";
-        public static string Title = "Counter (Infinite) v" + InternalVersion;
-        public static void Main(string[] args)
+        public const string Version = "0.0.0.6", Creator = "June Solis",
+            Title = "Counter (Infinite) v" + Version + " by " + Creator;
+        public static void Write(object obj)
+        {
+            if (obj != null)
+            {
+                Console.Out.WriteLine(obj);
+                Console.Out.Flush();
+            }
+        }
+        public static void Main(string[] _)
         {
             Console.Title = Title;
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.WriteLine("This counter runs indefinitely, press any key to continue.");
+            Write("This counter runs indefinitely, press any key to continue.");
             Console.ReadKey(true);
             Console.Clear();
             while (A != float.PositiveInfinity  && B != float.NegativeInfinity
@@ -22,10 +30,10 @@ namespace Infinite_Counter
                 B--;
                 C++;
                 D--;
-                Console.WriteLine(A);
-                Console.WriteLine(B);
-                Console.WriteLine(C);
-                Console.WriteLine(D);
+                Write(A);
+                Write(B);
+                Write(C);
+                Write(D);
             }
         }
     }
