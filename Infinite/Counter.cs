@@ -3,25 +3,22 @@ namespace Infinite_Counter
 {
     public static class Infinite
     {
-        public static float A, B;
-        public static double C, D;
-        public const string Version = "0.0.0.6", Creator = "June Solis",
+        static float A, B;
+        static double C, D;
+        public const string Version = "0.0.0.7", Creator = "May Wildflower",
             Title = "Counter (Infinite) v" + Version + " by " + Creator;
-        public static void Write(object obj)
+        static void Write(object obj)
         {
-            if (obj != null)
-            {
-                Console.Out.WriteLine(obj);
-                Console.Out.Flush();
-            }
+            Console.Out.WriteLine(obj);
+            Console.Out.Flush();
         }
-        public static void Main(string[] _)
+        public static void Main()
         {
             Console.Title = Title;
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.Black;
             Write("This counter runs indefinitely, press any key to continue.");
-            Console.ReadKey(true);
+            Console.ReadKey();
             Console.Clear();
             while (A != float.PositiveInfinity  && B != float.NegativeInfinity
                 && C != double.PositiveInfinity && D != double.NegativeInfinity)

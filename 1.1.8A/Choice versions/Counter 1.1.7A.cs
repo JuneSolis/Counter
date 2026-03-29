@@ -1,10 +1,9 @@
 using System;
 using System.Threading;
-public static class Counter
+public class Counter_1_1_7A
 {
-    public const string Version = "1.1.7", 
-        Creator = "June Solis",
-        Title = "Counter v" + Version + " by " + Creator;
+    public const string InternalVersion = "1.1.7a",
+        Text = "Counter v" + InternalVersion;
     public static string arg;
     public static void Write(object obj)
     {
@@ -16,8 +15,8 @@ public static class Counter
     }
     public static void Main(string[] args)
     {
-        Console.Title = Title;
-        Write(Title);
+        Console.Title = Text;
+        Write(Text);
         if (args.LongLength > 0)
         {
             arg = args[0];
